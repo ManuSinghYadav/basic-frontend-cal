@@ -1,12 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 export default function AdditionCalculator() {
   const [number, setNumber] = useState("");
   const [result, setResult] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { user } = useUser();
+
+  // console.log("Clerk user:", user);
+  // console.log("User ID:", user?.id);
+  // console.log("Full name:", user?.fullName);
 
   async function handleSubmit() {
     if (number === "") {
@@ -26,6 +32,8 @@ export default function AdditionCalculator() {
         },
         body: JSON.stringify({
           number: Number(number),
+          name: user?.fullName,
+          userid: user?.id,
         }),
       });
 
