@@ -54,5 +54,5 @@ def add_number(data: AddRequest, auth=Depends(verify_clerk_token),):
     }
 
 @app.get("/history")
-def get_history(user_id: str):
-    return display_live_db(user_id)
+def get_history(auth=Depends(verify_clerk_token),):
+    return display_live_db(auth["sub"])

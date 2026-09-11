@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useAuth } from '@clerk/nextjs';
@@ -58,8 +60,19 @@ export default function AdditionCalculator() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-4rem)] bg-gray-950 px-6 py-16">
-      <div className="mx-auto flex max-w-xl flex-col items-center">
+    <main className="min-h-[calc(100vh-4rem)] bg-gray-950 px-6 py-8">
+  
+      {/* History button */}
+      <div className="mx-auto flex max-w-6xl justify-end">
+        <Link
+          href="/history"
+          className="rounded-lg border border-white/10 px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-white/10 hover:text-white"
+        >
+          History
+        </Link>
+      </div>
+  
+      <div className="mx-auto flex max-w-xl flex-col items-center pt-10">
 
         <div className="mb-10 text-center">
           <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl font-bold text-gray-950">
@@ -97,6 +110,7 @@ export default function AdditionCalculator() {
             placeholder="Enter a number..."
             className="w-full rounded-xl border border-white/10 bg-gray-900 px-4 py-3 text-lg text-white outline-none placeholder:text-gray-600 focus:border-white/30 focus:ring-2 focus:ring-white/10"
           />
+          
 
           <button
             onClick={handleSubmit}
