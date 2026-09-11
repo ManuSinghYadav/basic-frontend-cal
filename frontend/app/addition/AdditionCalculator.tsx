@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useAuth } from '@clerk/nextjs';
+
 
 export default function AdditionCalculator() {
   const [number, setNumber] = useState("");
@@ -9,6 +11,7 @@ export default function AdditionCalculator() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { user } = useUser();
+  const { getToken } = useAuth();
 
   // console.log("Clerk user:", user);
   // console.log("User ID:", user?.id);
@@ -24,16 +27,20 @@ export default function AdditionCalculator() {
     setError("");
     setResult(null);
 
+    const token = await getToken();  
+    // console.log("TOKEN:", token);
+
     try {
       const response = await fetch("http://localhost:8000/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
         },
         body: JSON.stringify({
           number: Number(number),
-          name: user?.fullName,
-          userid: user?.id,
+          // name: user?.fullName, 
+          // userid: user?.id,
         }),
       });
 

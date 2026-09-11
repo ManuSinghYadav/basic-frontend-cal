@@ -1,4 +1,5 @@
 import datetime
+from unittest import result
 
 import psycopg2
 
@@ -14,7 +15,6 @@ def verify_and_setup_infrastructure():
                 CREATE TABLE IF NOT EXISTS chat_history (
                     id SERIAL PRIMARY KEY,
                     user_id VARCHAR(100) NOT NULL,
-                    user_name VARCHAR(50) NOT NULL,
                     number TEXT NOT NULL,
                     time VARCHAR(30)
                 );
@@ -22,17 +22,17 @@ def verify_and_setup_infrastructure():
             conn.commit()
     print("Chat history table verified/created.")
 
-def add_transaction(user_id: str, user_name: str, number: str):
+def add_transaction(user_id: str, number: str):
     x = datetime.datetime.now()
     formatted_time = x.strftime("%d-%m-%Y %H:%M:%S")
 
     with psycopg2.connect(PG_URL) as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                INSERT INTO chat_history (user_id, user_name, number, time)
-                VALUES (%s, %s, %s, %s)
+                INSERT INTO chat_history (user_id, number, time)
+                VALUES (%s, %s, %s)
                 RETURNING id;
-            """, (user_id, user_name, number, formatted_time))
+            """, (user_id, number, formatted_time))
             
             inserted_id = cur.fetchone()[0]
             conn.commit()
@@ -53,5 +53,5 @@ def display_live_db(user_id: str):
             for row in cur.fetchall():
                 number, time = row
                 results.append({"number": number, "time": time})
+            print(results)
             return results
-       
