@@ -9,4 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# Environment Variables
 .env
+
+# AWS Lambda files
+lambda_deployment.zip
+lambda_package/
