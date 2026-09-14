@@ -5,7 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useAuth } from '@clerk/nextjs';
-
+import {
+  SignInButton,
+  SignUpButton,
+} from "@clerk/nextjs";
 
 export default function AdditionCalculator() {
   const [number, setNumber] = useState("");
@@ -21,7 +24,41 @@ export default function AdditionCalculator() {
   }
 
   if (!isSignedIn) {
-    return <div>Please sign in you MF.</div>;
+    return (
+      <div className="min-h-[calc(100vh-4rem)] bg-gray-950 px-6">
+        <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
+          <div className="w-full max-w-md rounded-2xl border border-white/10 bg-gray-900 p-8 text-center shadow-2xl">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-3xl font-bold text-gray-950">
+              +
+            </div>
+  
+            <h1 className="mb-3 text-2xl font-semibold text-white">
+              Sign in to use the calculator
+            </h1>
+  
+            <p className="mb-8 text-sm leading-6 text-gray-400">
+              Your calculation history is saved to your account, so sign in to
+              continue.
+            </p>
+  
+            <SignInButton mode="modal">
+              <button className="w-full rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition hover:bg-gray-200">
+                Sign in to continue
+              </button>
+            </SignInButton>
+  
+            <p className="mt-5 text-sm text-gray-500">
+              Don't have an account?{" "}
+              <SignUpButton mode="modal">
+                <button className="font-medium text-gray-300 hover:text-white">
+                  Create one
+                </button>
+              </SignUpButton>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // console.log("Clerk user:", user);
