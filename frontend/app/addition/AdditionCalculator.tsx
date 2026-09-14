@@ -12,8 +12,17 @@ export default function AdditionCalculator() {
   const [result, setResult] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { isLoaded, isSignedIn } = useAuth();
   const { user } = useUser();
   const { getToken } = useAuth();
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isSignedIn) {
+    return <div>Please sign in you MF.</div>;
+  }
 
   // console.log("Clerk user:", user);
   // console.log("User ID:", user?.id);
