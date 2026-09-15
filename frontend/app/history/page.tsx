@@ -16,7 +16,7 @@ export default function HistoryPage() {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  
   useEffect(() => {
     if (!isLoaded || !isSignedIn) return;
 
@@ -25,7 +25,7 @@ export default function HistoryPage() {
         const token = await getToken();
 
         const response = await fetch(
-          "http://localhost:8000/history",
+          `${process.env.NEXT_PUBLIC_API_URL}/history`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
