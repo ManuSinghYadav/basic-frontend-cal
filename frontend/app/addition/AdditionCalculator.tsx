@@ -3,12 +3,7 @@
 import Link from "next/link";
 
 import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
-import { useAuth } from '@clerk/nextjs';
-import {
-  SignInButton,
-  SignUpButton,
-} from "@clerk/nextjs";
+import { useUser, useAuth, SignInButton, SignUpButton } from "@clerk/react";
 
 export default function AdditionCalculator() {
   const [number, setNumber] = useState("");

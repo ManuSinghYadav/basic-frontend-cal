@@ -5,7 +5,7 @@ import {
   SignInButton,
   SignUpButton,
   UserButton,
-} from "@clerk/nextjs";
+} from "@clerk/react";
 
 export default function AuthButtons() {
   return (

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { ClerkProvider } from "@clerk/nextjs";
 import Link from "next/link";
+import AppClerkProvider from "@/components/AppClerkProvider";
 import AuthButtons from "@/components/AuthButtons";
 
 export const metadata: Metadata = {
@@ -16,12 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <AppClerkProvider>
       <html lang="en">
         <body className="min-h-screen bg-gray-950 text-white antialiased">
           <header className="border-b border-white/10 bg-gray-950/80 backdrop-blur-md">
             <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-
+    
               <Link
                 href="/"
                 className="flex items-center gap-2.5"
@@ -43,6 +43,6 @@ export default function RootLayout({
           <main>{children}</main>
         </body>
       </html>
-    </ClerkProvider>
+    </AppClerkProvider>
   );
 }

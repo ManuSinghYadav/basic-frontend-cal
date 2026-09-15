@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/react";
 
 type HistoryItem = {
   number: string;
