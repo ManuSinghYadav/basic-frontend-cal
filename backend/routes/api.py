@@ -44,7 +44,7 @@ def add_number(data: AddRequest, auth=Depends(verify_clerk_token),):
     # print(auth)
     # print("User id:", auth["sub"])
     # print(data.number)
-
+    
     verify_and_setup_infrastructure()
     add_transaction(auth["sub"], data.number)
     display_live_db(auth["sub"])

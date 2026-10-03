@@ -26,7 +26,7 @@ def add_transaction(user_id: str, number: str):
     x = datetime.datetime.now()
     formatted_time = x.strftime("%d-%m-%Y %H:%M:%S")
 
-    with psycopg2.connect(PG_URL) as conn:
+    with psycopg2.connect(PG_URL, connect_timeout=5) as conn:
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO chat_history (user_id, number, time)
@@ -40,7 +40,7 @@ def add_transaction(user_id: str, number: str):
 
 def display_live_db(user_id: str):
     print(f"\n--- Conversation History for Session: {user_id} ---")
-    with psycopg2.connect(PG_URL) as conn:
+    with psycopg2.connect(PG_URL, connect_timeout=5) as conn:
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT number, time
