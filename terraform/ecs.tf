@@ -71,6 +71,14 @@ resource "aws_ecs_task_definition" "ecs_task" {
       name      = "${var.project_name}-container"
       image     = var.container_image
       essential = true
+
+      # Plain-text environment variables
+      environment = [
+        { name = "DB_URL", value = var.db_url },
+        { name = "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", value = var.next_public_clerk_publishable_key },
+        { name = "CLERK_SECRET_KEY", value = var.clerk_secret_key }
+      ]
+
       portMappings = [
         {
           containerPort = 8000
@@ -80,6 +88,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
       ]
     }
   ])
+
 }
 
 # 5. ECS Fargate Service
