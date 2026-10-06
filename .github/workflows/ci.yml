@@ -10,6 +10,11 @@ jobs:
   lint-and-typecheck:
     runs-on: ubuntu-latest
 
+    # Set the default working directory for all run steps in this job
+    defaults:
+      run:
+        working-directory: backend
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
