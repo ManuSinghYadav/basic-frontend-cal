@@ -14,3 +14,9 @@ dependencies = [
     "pydantic-settings>=2.15.0",
     "uvicorn>=0.52.4",
 ]
+
+[dependency-groups]
+astral = [
+    "ruff>=0.16.10",
+    "ty>=0.0.84",
+]
